@@ -14,113 +14,123 @@ from transformers.data.processors.squad import SquadResult, SquadV2Processor, Sq
 from transformers.data.metrics.squad_metrics import compute_predictions_logits
 
 
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning)  # Ignore FutureWarnings
+
 def run_prediction(question_texts, context_text, model_path, n_best_size):
-    max_seq_length = 512
-    doc_stride = 256
-    n_best_size = n_best_size
-    max_query_length = 64
-    max_answer_length = 512
-    do_lower_case = False
-    null_score_diff_threshold = 0.0
+    try:
+        max_seq_length = 512
+        doc_stride = 256
+        n_best_size = n_best_size
+        max_query_length = 64
+        max_answer_length = 512
+        do_lower_case = False
+        null_score_diff_threshold = 0.0
 
-    def to_list(tensor):
-        return tensor.detach().cpu().tolist()
+        def to_list(tensor):
+            return tensor.detach().cpu().tolist()
 
-    config_class, model_class, tokenizer_class = (AutoConfig, AutoModelForQuestionAnswering, AutoTokenizer)
-    config = config_class.from_pretrained(model_path)
-    tokenizer = tokenizer_class.from_pretrained(model_path, do_lower_case=True, use_fast=False)
-    model = model_class.from_pretrained(model_path, config=config)
+        # Load model and tokenizer
+        print(f"Loading model from {model_path}...")
+        config_class, model_class, tokenizer_class = (AutoConfig, AutoModelForQuestionAnswering, AutoTokenizer)
+        config = config_class.from_pretrained(model_path)
+        tokenizer = tokenizer_class.from_pretrained(model_path, do_lower_case=True, use_fast=False)
+        model = model_class.from_pretrained(model_path, config=config)
+        print("Model and tokenizer loaded successfully.")
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        model.to(device)
+        print(f"Using device: {device}")
 
-    processor = SquadV2Processor()
-    examples = []
+        processor = SquadV2Processor()
+        examples = []
 
-    timer = time.time()
-    for i, question_text in enumerate(question_texts):
-        
-        example = SquadExample(
-            qas_id=str(i),
-            question_text=question_text,
-            context_text=context_text,
-            answer_text=None,
-            start_position_character=None,
-            title="Predict",
-            answers=None,
+        timer = time.time()
+        for i, question_text in enumerate(question_texts):
+            example = SquadExample(
+                qas_id=str(i),
+                question_text=question_text,
+                context_text=context_text,
+                answer_text=None,
+                start_position_character=None,
+                title="Predict",
+                answers=None,
+            )
+            examples.append(example)
+        print(f'Created Squad Examples in {time.time() - timer} seconds')
+
+        print(f'Number of CPUs: {cpu_count()}')
+        timer = time.time()
+        features, dataset = squad_convert_examples_to_features(
+            examples=examples,
+            tokenizer=tokenizer,
+            max_seq_length=max_seq_length,
+            doc_stride=doc_stride,
+            max_query_length=max_query_length,
+            is_training=False,
+            return_dataset="pt",
+            threads=cpu_count(),
         )
+        print(f'Converted Examples to Features in {time.time() - timer} seconds')
 
-        examples.append(example)
-    print(f'Created Squad Examples in {time.time()-timer} seconds')
+        eval_sampler = SequentialSampler(dataset)
+        eval_dataloader = DataLoader(dataset, sampler=eval_sampler, batch_size=10)
 
-    print(f'Number of CPUs: {cpu_count()}')
-    timer = time.time()
-    features, dataset = squad_convert_examples_to_features(
-        examples=examples,
-        tokenizer=tokenizer,
-        max_seq_length=max_seq_length,
-        doc_stride=doc_stride,
-        max_query_length=max_query_length,
-        is_training=False,
-        return_dataset="pt",
-        threads=cpu_count(),
-    )
-    print(f'Converted Examples to Features in {time.time()-timer} seconds')
+        all_results = []
 
-    eval_sampler = SequentialSampler(dataset)
-    eval_dataloader = DataLoader(dataset, sampler=eval_sampler, batch_size=10)
+        timer = time.time()
+        for batch in eval_dataloader:
+            model.eval()
+            batch = tuple(t.to(device) for t in batch)
 
-    all_results = []
+            with torch.no_grad():
+                inputs = {
+                    "input_ids": batch[0],
+                    "attention_mask": batch[1],
+                    "token_type_ids": batch[2],
+                }
 
-    timer = time.time()
-    for batch in eval_dataloader:
-        model.eval()
-        batch = tuple(t.to(device) for t in batch)
+                example_indices = batch[3]
 
-        with torch.no_grad():
-            inputs = {
-                "input_ids": batch[0],
-                "attention_mask": batch[1],
-                "token_type_ids": batch[2],
-            }
+                outputs = model(**inputs)
 
-            example_indices = batch[3]
+                for i, example_index in enumerate(example_indices):
+                    eval_feature = features[example_index.item()]
+                    unique_id = int(eval_feature.unique_id)
 
-            outputs = model(**inputs)
+                    output = [to_list(output[i]) for output in outputs.to_tuple()]
 
-            for i, example_index in enumerate(example_indices):
-                eval_feature = features[example_index.item()]
-                unique_id = int(eval_feature.unique_id)
+                    start_logits, end_logits = output
+                    result = SquadResult(unique_id, start_logits, end_logits)
+                    all_results.append(result)
+        print(f'Model predictions completed in {time.time() - timer} seconds')
 
-                output = [to_list(output[i]) for output in outputs.to_tuple()]
+        print("All results computed:", all_results)
 
-                start_logits, end_logits = output
-                result = SquadResult(unique_id, start_logits, end_logits)
-                all_results.append(result)
-    print(f'Model predictions completed in {time.time()-timer} seconds') 
+        output_nbest_file = None
+        if n_best_size > 1:
+            output_nbest_file = "nbest.json"
 
-    print(all_results)
+        timer = time.time()
+        final_predictions = compute_predictions_logits(
+            all_examples=examples,
+            all_features=features,
+            all_results=all_results,
+            n_best_size=n_best_size,
+            max_answer_length=max_answer_length,
+            do_lower_case=do_lower_case,
+            output_prediction_file=None,
+            output_nbest_file=output_nbest_file,
+            output_null_log_odds_file=None,
+            verbose_logging=False,
+            version_2_with_negative=True,
+            null_score_diff_threshold=null_score_diff_threshold,
+            tokenizer=tokenizer
+        )
+        print(f'Logits converted to predictions in {time.time() - timer} seconds')
 
-    output_nbest_file = None
-    if n_best_size > 1:
-        output_nbest_file = "nbest.json"
+        return final_predictions
 
-    timer = time.time()
-    final_predictions = compute_predictions_logits(
-        all_examples=examples,
-        all_features=features,
-        all_results=all_results,
-        n_best_size=n_best_size,
-        max_answer_length=max_answer_length,
-        do_lower_case=do_lower_case,
-        output_prediction_file=None,
-        output_nbest_file=output_nbest_file,
-        output_null_log_odds_file=None,
-        verbose_logging=False,
-        version_2_with_negative=True,
-        null_score_diff_threshold=null_score_diff_threshold,
-        tokenizer=tokenizer
-    )
-    print(f'Logits converted to predictions in {time.time()-timer} seconds')
-
-    return final_predictions
+    except Exception as e:
+        print(f"Error in run_prediction: {e}")
+        return {}

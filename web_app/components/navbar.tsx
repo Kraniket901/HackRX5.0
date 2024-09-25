@@ -35,7 +35,9 @@ export const NavBar = () => {
     <Navbar expand="md" className={scrolled ? "scrolled" : ""}>
       <Container>
         <Navbar.Brand href="/">
-          <img className="logo-css" src="/assets/img/new_logo.png" alt="Logo" />
+          {/* <img className="logo-css" src="/assets/img/new_logo.png" alt="Logo" /> */}
+          <input style={{background:"transparent", border:"none", color:"#e8b11c", fontSize:"30px", fontWeight:600, cursor:"pointer", width:"125px"}} value="Legal👁️"/>
+          <input style={{background:"transparent", border:"none", color:"white", fontSize:"35px", fontWeight:600, cursor:"pointer"}} value="AI"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">
           <span className="navbar-toggler-icon"></span>
@@ -67,7 +69,7 @@ export const NavBar = () => {
               }
               onClick={() => onUpdateActiveLink("projects")}
             >
-              Developers
+              Team
             </Nav.Link>
           </Nav>
 

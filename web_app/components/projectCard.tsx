@@ -11,7 +11,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, im
   const imageUrl = typeof imgUrl === "string" ? imgUrl : imgUrl.toString();
 
   return (
-    <Col xs={12} sm={6} md={4}>
+    <Col xs={12} sm={6} md={3}>
       <div className="proj-imgbx">
         <img src={imageUrl} alt="Project Image" />
         <div className="proj-txtx">

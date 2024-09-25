@@ -11,7 +11,7 @@ export default function App({
 }: AppProps<{ session: Session }>) {
   
   return (
-    <SessionProvider session={session}>
+    <SessionProvider>
       <Head>
         <title>Legal Ai</title>
         <link rel="icon" href="/favicon.ico" />

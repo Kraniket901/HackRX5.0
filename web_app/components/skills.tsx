@@ -72,29 +72,29 @@ export const Skills: React.FC = () => {
             <div className="skill-bx wow zoomIn">
               <h2>Features</h2>
               <p>Our plateform offers variety of fabulous features.</p>
-              <Slider {...settings} className="owl-carousel owl-theme skill-slider">
+              <div className="skill-slider">
                 <div className="item">
-                  <img src="https://i.postimg.cc/k41pQ35K/Untitled-design-1.png" alt="Image" />
-                  <h5>Automated Legal Document Analysis</h5>
+                  <img src="https://cdn-icons-png.flaticon.com/512/10397/10397230.png" alt="Image" />
+                  <h5>Clause Analysis and Comparison</h5>
                 </div>
                 <div className="item">
-                  <img src="https://i.postimg.cc/43F6wJzf/Untitled-design.png" alt="Image" />
-                  <h5>Ask your contract yourself</h5>
+                  <img src="https://cdn-icons-png.flaticon.com/512/8510/8510147.png" alt="Image" />
+                  <h5>Automated Alerts and Notifications</h5>
                 </div>
                 <div className="item">
-                  <img src="https://i.postimg.cc/Gp5qSPks/Untitled-design-3.png" alt="Image" />
-                  <h5>Identification of Risks and Opportunities</h5>
+                  <img src="https://icons.veryicon.com/png/o/business/office-icon-collection/summary-18.png" alt="Image" />
+                  <h5>Document Summarization and Reporting</h5>
                 </div>
                 <div className="item">
-                  <img src="https://i.postimg.cc/J0tYz6Mx/Untitled-design-2.png" alt="Image" />
-                  <h5>Enhanced Speed and Accuracy</h5>
+                  <img src="https://cdn-icons-png.flaticon.com/512/13479/13479838.png" alt="Image" />
+                  <h5>Risk Assessment and Scoring System</h5>
                 </div>
-              </Slider>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <img src="https://i.postimg.cc/1Xz09km7/Untitled-design-3.png" className="background-image-left"  alt="Image" />
+      {/* <img src="https://i.postimg.cc/1Xz09km7/Untitled-design-3.png" className="background-image-left"  alt="Image" /> */}
     </section>
   );
 };

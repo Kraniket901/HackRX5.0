@@ -1,10 +1,10 @@
 
 .dashboard {
     
-    background-image: url('/assets/img/banner-bg.png');
-  background-position: top center;
+    /* background-image: url('/assets/img/banner-bg.png'); */
+  /* background-position: top center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
   }
 
 .titre ,.first-word ,.complete-phrase {
@@ -75,8 +75,9 @@
 
   
   .custom-btn {
-    margin: 20px;
-    width: 130px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 180px;
     height: 40px;
     color: #fff;
     border-radius: 5px;
@@ -95,8 +96,8 @@
   }
 
   .btn-8 {
-    background-color: #f0ecfc;
-  background-image: linear-gradient(315deg, #6948cc 0%, #c797eb 74%);
+    background-color: #e8b11c;
+  background-image: linear-gradient(315deg, #e8b11c 0%, #e8b11c 74%);
     line-height: 42px;
     padding: 0;
     border: none;
@@ -135,7 +136,8 @@
     width: 100%;
   }
   .btn-8:hover{
-    background: transparent;
+    /* background: transparent; */
+    background-color: #bb8b07;
   }
   .btn-8 span:hover{
     color: #c797eb;
@@ -175,6 +177,7 @@
     width: 200px;
     transition: all 0.3s ease;
     overflow: hidden;
+    cursor: pointer;
   }
   .btn-9:after {
     position: absolute;
@@ -185,50 +188,50 @@
     width: 100%;
     height: 100%;
      background-color: #1fd1f9;
-  background-image: linear-gradient(315deg, #421858 0%, #b621fe 74%);
+  background-image: linear-gradient(315deg, #e8b11c 0%, #e8b11c 74%);
     transition: all 0.3s ease;
   }
   .btn-9:hover {
     background: transparent;
-    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+    /* box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
       inset -4px -4px 6px 0 rgba(255,255,255,.5),
-      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3); */
     color: #fff;
   }
   .btn-9:hover:after {
-    -webkit-transform: scale(2) rotate(180deg);
-    transform: scale(2) rotate(180deg);
-    box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+    /* -webkit-transform: scale(2) rotate(180deg); */
+    /* transform: scale(2) rotate(180deg); */
+    /* box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
                 -4px -4px 6px 0 rgba(116, 125, 136, .2), 
       inset -4px -4px 6px 0 rgba(255,255,255,.5),
-      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3); */
   }
 
   
   .select-box {
-    width: 300px;
-    padding: 10px;
+    width: 500px;
+    padding: 10px 16px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
     background-color: #ffffff;
-    color: rebeccapurple;
+    color: #333333;
     appearance: none;
     outline: none;
     cursor: pointer;
   }
   
   .select-box option {
-    color: rebeccapurple;
+    color: #333333;
   }
   
   .select-box:hover {
-    box-shadow: 0 0 5px rebeccapurple;
+    box-shadow: 0 0 5px #e8b11c;
   }
   
   .select-box:focus {
-    box-shadow: 0 0 5px rebeccapurple;
+    box-shadow: 0 0 5px #e8b11c;
   }
   
   
@@ -239,6 +242,7 @@
     margin: auto;
     justify-content: center;
     align-items: center;
+    padding-top: 8rem;
 }
   
 .drop-container {
@@ -248,26 +252,30 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 210px;
     padding: 20px;
     border-radius: 10px;
-    border: 2px dashed rebeccapurple;
-    color: rebeccapurple;
-    cursor: pointer;
+    border: 2px dashed #e8b11c;
+    color: #e8b11c;
     transition: background .2s ease-in-out, border .2s ease-in-out;
+  }
+
+  .drop-container img{
+    height: 50px;
+    width: 50px;
   }
   
   .drop-container:hover {
-    background: #eee;
-    border-color: #111;
+    /* background: #eee; */
+    /* border-color: #111; */
   }
   
   .drop-container:hover .drop-title {
-    color: #222;
+    /* color: #222; */
   }
   
   .drop-title {
-    color: rebeccapurple;
+    color: #e8b11c;
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -279,7 +287,7 @@
   .file-upload::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: rebeccapurple;
+    background: #e8b11c;
     padding: 10px 20px;
     border-radius: 10px;
     color: #fff;
@@ -288,7 +296,7 @@
   }
   
   .file-upload::file-selector-button:hover {
-    background: #9d0da5;
+    background: #bb8b07;
   }
 
   .message-box {
@@ -447,8 +455,8 @@
     left: 120px;
     width: calc(100% - 240px);
     background: transparent;
-    color: rgb(255 200 255 / 0.5);
-    text-shadow: 0 0 12px rebeccapurple;
+    color: #bb8b07;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
     border: none;
     text-align: center;
     letter-spacing: 0.1em;
@@ -496,7 +504,7 @@
       rgba(255, 255, 255, 0.03) 0px 2px,
       transparent 2px 4px
     ),
-    linear-gradient(to bottom, #200933 75%, #3d0b43);
+    linear-gradient(to bottom, #bb8b074b 75%, #bb8b07ba);
   }
   .bg::after{
     content:'';

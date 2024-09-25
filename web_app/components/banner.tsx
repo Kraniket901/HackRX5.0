@@ -55,12 +55,12 @@ export const Banner = () => {
               {({ isVisible }) => (
                 <div
                   className={
-                    isVisible ? "animate__animated animate__fadeIn" : ""
+                    isVisible ? "" : ""
                   }
                 >
-                  <span className="tagline">Welcome to Legal AI</span>
+                  <span className="tagline">Welcome to <span>Legal</span>👁️ AI</span>
                   <h1>
-                    Discover the power of innovation with AI.
+                  Intelligent <span>Legal Insights</span> & Alerts At Your Fingertips
                     {/* {`Hi! I'm Judy`}{" "}
                     <span
                       className="txt-rotate"
@@ -71,11 +71,11 @@ export const Banner = () => {
                     </span> */}
                   </h1>
                   <p>
-                  Traditionally, analyzing legal documents is time-consuming and expensive. Our platform automates the process by applying machine learning algorithms to identify relevant information and viewpoints, such as clauses, terms, and patterns. This significantly improves the speed and accuracy of legal research, identifies potential risks and opportunities, and enhances compliance. Legal analysis becomes quicker, easier, and more reliable.
+                  LexiGuard provides deep insights, identifies risks, and ensures compliance by continuously monitoring legal data. Stay ahead with intelligent alerts that keep you informed and proactive, enabling efficient decision-making and safeguarding your legal interests.
                   </p>
-                  <a href="/dashboard">
+                  <a style={{textDecoration:"none"}} href="/dashboard">
                     <button >
-                      Get Started for free <ArrowRightCircle size={25} />
+                      Let's Get Started <ArrowRightCircle size={25} />
                     </button>
                   </a>
                 </div>
@@ -87,11 +87,11 @@ export const Banner = () => {
               {({ isVisible }) => (
                 <div
                   className={
-                    isVisible ? "animate__animated animate__zoomIn" : ""
+                    isVisible ? "animate__animated" : ""
                   }
                 >
                   <img
-                    src="https://i.postimg.cc/X7PNPjKp/Untitled-design-2.png"
+                    src="./assets/img/hero.png"
                     alt="Header Img"
                   />
                 </div>

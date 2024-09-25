@@ -11,19 +11,24 @@ export const Projects = () => {
 
   const projects = [
     {
-      title: "Khouloud Taouchikht",
-      description: "Software Engineer",
-      imgUrl: "https://i.postimg.cc/qqwFdbJv/Screenshot-2023-04-23-172918.png",
+      title: "Aniket Kumar",
+      description: "Leader",
+      imgUrl: "https://media.licdn.com/dms/image/v2/D5603AQG6Np7TmZkYKQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1709215161287?e=1732752000&v=beta&t=6mT58Fd-hFr0P-H0MKBRsoCWmgzzuqCuMgvEhkAVz00",
     },
     {
-      title: "OUSSAMA LOUATI",
-      description: "Software Engineer",
-      imgUrl: "https://i.postimg.cc/xCRJGMjz/OUSSAMA-LOUATI.jpg",
+      title: "Pranjal Naman",
+      description: "Frontend Developer",
+      imgUrl: "./assets/img/profilePic.jpeg",
     },
     {
-      title: "Houda el ibrahimi",
-      description: "Software Engineer",
-      imgUrl: "https://i.postimg.cc/zvhmZSLL/justme-1.jpg",
+      title: "Prince Tripathi",
+      description: "Backend Developer",
+      imgUrl: "https://media.licdn.com/dms/image/v2/D5603AQGTZNFHP_7DJQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1708696327687?e=1732752000&v=beta&t=DHfNwygemGntu0Mrh50DCb2A9qCd_wsaDc8YrZlWneI",
+    },
+    {
+      title: "Mohit Doraiburu",
+      description: "Machine Learning Developer",
+      imgUrl: "https://nitrr-class-locator.netlify.app/assets/img/team/mohit.jpeg",
     },
   ];
 
@@ -34,9 +39,9 @@ export const Projects = () => {
           <Col sm={12}>
             <TrackVisibility>
               {({ isVisible }) =>
-              <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <h2>Who we are ?</h2>
-                <p>Our projects have been brought to life with the assistance of a diverse group of skilled INPT students. These talented individuals have contributed their expertise, passion, and dedication to crafting innovative solutions that meet the needs of our clients and users.</p>
+              <div className={isVisible ? "" : ""}>
+                <h2>Upper Moons</h2>
+                <p>A dynamic team of innovators pushing the boundaries of technology. We tackle challenges head-on with creativity and precision, striving to build impactful solutions that illuminate the future.</p>
                 <Tab.Container id="projects-tabs" defaultActiveKey="first">
                   {/* <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
                     <Nav.Item>
@@ -49,7 +54,7 @@ export const Projects = () => {
                       <Nav.Link eventKey="third">Tab 3</Nav.Link>
                     </Nav.Item>
                   </Nav> */}
-                  <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
+                  <Tab.Content className={isVisible ? "" : ""}>
                     <Tab.Pane eventKey="first">
                       <Row>
                         {
