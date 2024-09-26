@@ -13,7 +13,7 @@ export const Projects = () => {
     {
       title: "Aniket Kumar",
       description: "Leader",
-      imgUrl: "https://media.licdn.com/dms/image/v2/D5603AQG6Np7TmZkYKQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1709215161287?e=1732752000&v=beta&t=6mT58Fd-hFr0P-H0MKBRsoCWmgzzuqCuMgvEhkAVz00",
+      imgUrl: "https://kraniket901.vercel.app/img/pfp.jpg",
     },
     {
       title: "Pranjal Naman",
