@@ -18,7 +18,7 @@ const FileUpload: React.FC = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch('https://hackrx5-0.onrender.com//questionsshort');
+      const response = await fetch('https://hackrx5-0.onrender.com/questionsshort');
       const data = await response.json();
       console.log(data);
       setQuestions(data);
