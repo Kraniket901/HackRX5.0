@@ -18,7 +18,7 @@ export const Projects = () => {
     {
       title: "Pranjal Naman",
       description: "Frontend Developer",
-      imgUrl: "./assets/img/profilePic.jpeg",
+      imgUrl: "https://raw.githubusercontent.com/Kraniket901/Dbugger/refs/heads/main/static/images/pranjal.jpg",
     },
     {
       title: "Prince Tripathi",
