@@ -23,7 +23,7 @@ export const Projects = () => {
     {
       title: "Prince Tripathi",
       description: "Backend Developer",
-      imgUrl: "https://media.licdn.com/dms/image/v2/D5603AQGTZNFHP_7DJQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1708696327687?e=1732752000&v=beta&t=DHfNwygemGntu0Mrh50DCb2A9qCd_wsaDc8YrZlWneI",
+      imgUrl: "https://raw.githubusercontent.com/Kraniket901/Dbugger/refs/heads/main/static/images/prince.jpg",
     },
     {
       title: "Mohit Doraiburu",
