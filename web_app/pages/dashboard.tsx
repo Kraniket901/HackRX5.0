@@ -18,7 +18,7 @@ const FileUpload: React.FC = () => {
 
   const fetchQuestions = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/questionsshort');
+      const response = await fetch('https://hackrx5-0.onrender.com//questionsshort');
       const data = await response.json();
       console.log(data);
       setQuestions(data);
@@ -43,7 +43,7 @@ const FileUpload: React.FC = () => {
       progress: undefined,
       theme: "dark",
       });
-    fetch('http://127.0.0.1:5000/contracts/', {
+    fetch('https://hackrx5-0.onrender.com/contracts/', {
       method: 'POST',
       body: formData,
     })
@@ -97,7 +97,7 @@ const FileUpload: React.FC = () => {
     if (selectedResponse !== '') {
       const encodedSelectedResponse = encodeURIComponent(selectedResponse);
       const apiUrl =
-        'http://127.0.0.1:5000/contracts/paraphrase/' + encodedSelectedResponse;
+        'https://hackrx5-0.onrender.com/contracts/paraphrase/' + encodedSelectedResponse;
       fetch(apiUrl)
         .then((response) => response.json())
         .then((data) => {
