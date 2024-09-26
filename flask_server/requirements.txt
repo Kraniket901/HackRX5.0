@@ -6,3 +6,4 @@ PyPDF4
 flask
 textblob
 flask_cors
+gunicorn
