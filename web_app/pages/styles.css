@@ -428,6 +428,20 @@
   resize: none;
     
   }
+  .code-textarea2{
+    background-color: white;
+    outline: none;
+    border: none;
+    border-radius: 20px;
+    position: absolute;
+    top: 125px;
+    left: 90px;
+    width: 18%;
+  height: 36%;
+  resize: none;
+    padding: 2rem;
+  }
+
   /* .dots {
     position: absolute;
     top: 2px;
@@ -456,7 +470,7 @@
     width: calc(100% - 240px);
     background: transparent;
     color: #bb8b07;
-    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+    text-shadow: 1px 1px 2px #342d2d;
     border: none;
     text-align: center;
     letter-spacing: 0.1em;
@@ -476,6 +490,11 @@
     font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
   }
   
+  .btn-12:hover{
+    background-color: #e8b11c;
+    color:"white"
+  }
+
   /* body {
     display: grid;
     min-height: 100vh;

@@ -4,6 +4,8 @@ import axios from 'axios';
 import AccessDenied from '../components/access-denied';
 import { useSession } from 'next-auth/react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FileUpload: React.FC = () => {
   const [selectedResponse, setSelectedResponse] = useState<string>('');
@@ -31,13 +33,32 @@ const FileUpload: React.FC = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     console.log(formData);
-
+    toast.success('Data Sent Successfully', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+      });
     fetch('http://127.0.0.1:5000/contracts/', {
       method: 'POST',
       body: formData,
     })
       .then((response) => response.json())
       .then((data) => {
+        toast.success('Data Processed Successfully!', {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
         console.log(data[0].answer);
         setSelectedResponse(data[0].answer);
         console.log(data[0].answer);
@@ -69,7 +90,8 @@ const FileUpload: React.FC = () => {
         });
         document.getElementById('explanation')!.innerHTML = '';
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)});
   };
   const handleExplanationClick = () => {
     if (selectedResponse !== '') {
@@ -90,7 +112,14 @@ const FileUpload: React.FC = () => {
   return (
     < >
     <NavBar/>
-      <div className='dashboard'>
+      <div className='dashboard' style={{position:"relative"}}>
+        <button className='custom-btn btn-9 btn-12' style={{position:"absolute", top:"150px", right:"90px", backgroundColor:"white", color:"#342d2d", fontWeight:400, display:"flex", justifyContent:"center", alignItems:"center", width:"180px"}}>
+          <img src="https://static-00.iconduck.com/assets.00/share-icon-2048x1911-60w04qpe.png" style={{height:"20px", width:"20px", marginRight:"10px"}} alt="" />
+          Share Report</button>
+
+          <textarea className="code-textarea2" rows={10} placeholder="🔔 Get Alerts Here..." readOnly>
+          </textarea>
+
 
         <form onSubmit={handleFormSubmit} encType="multipart/form-data">
           {/* <input type="file" name="file" /> */}
@@ -100,7 +129,7 @@ const FileUpload: React.FC = () => {
             or
             <input type="file" className='file-upload' name="file" required />
           </label>
-          <p className='mt-3 mb-2'>Choose Question from the Dropdown</p>
+          <p className='mt-5 mb-2'>Choose Question from the Dropdown</p>
           <select name="question" className="select-box" >
             {questions && questions.map((question, index) => (
               <option key={index} value={question}>
@@ -117,14 +146,14 @@ const FileUpload: React.FC = () => {
         <div id="response"></div>
         <div className="code-container" style={{margin:"5rem 0"}}>
           <section className="augs bg" data-augmented-ui>
-            <input className="title" value="Get Response" />
+            <input className="title" value="Document Analysis" />
             <div className="code highcontrast-dark" style={{padding:"1rem"}}>
-              <textarea id="response" className="code-textarea" rows={10} placeholder="Generate Response Here..." readOnly>
+              <textarea id="response" className="code-textarea" rows={10} placeholder="Get Analysis Here with Deadlines, Legal Risk, Risk Score, Sentiment Analysis..." readOnly>
               </textarea>
             </div>
           </section>
         </div>
-        <button className="custom-btn btn-9" onClick={handleExplanationClick}><span>Explain response</span></button>
+        <button className="custom-btn btn-9" onClick={handleExplanationClick}><span>Summary Report</span></button>
         <div className="ccode highcontrast-dark" id="explanation"></div>
         <div className="ccode highcontrast-dark" id="analysis"></div>
       </div>

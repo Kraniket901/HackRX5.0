@@ -4,6 +4,7 @@ import "../styles/demo.css"
 import type { AppProps } from "next/app"
 import type { Session } from "next-auth"
 import Head from "next/head"
+import { ToastContainer } from "react-toastify"
 
 export default function App({
   Component,
@@ -13,10 +14,11 @@ export default function App({
   return (
     <SessionProvider>
       <Head>
-        <title>Legal Ai</title>
+        <title>Legal👁️ AI</title>
         <link rel="icon" href="/favicon.ico" />
         {/* Add other meta tags, stylesheets, etc. as needed */}
       </Head>
+      <ToastContainer style={{zIndex:100}} />
       <Component {...pageProps} />
     </SessionProvider>
   )
